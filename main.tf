@@ -15,4 +15,5 @@ module "infra" {
 module "app" {
   source        = "./modules/app"
   ecr_repo_name = "ui"
+  app_path      = "ui"
 }

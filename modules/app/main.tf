@@ -12,3 +12,12 @@ resource "terraform_data" "login" {
               EOT
   }
 }
+
+resource "terraform_data" "build" {
+  provisioner "local-exec" {
+    command = <<EOT
+              docker build -t ${local.ecr_url} \
+              ${path.module}/apps/${var.app_path}
+              EOT 
+  }
+}
