@@ -16,4 +16,5 @@ module "app" {
   source        = "./modules/app"
   ecr_repo_name = "ui"
   app_path      = "ui"
+  image_version = "1.0.1"
 }
