@@ -39,3 +39,12 @@ output "alb_details" {
     sg_name      = aws_security_group.alb.name
   }
 }
+
+output "ecs_cluster_details" {
+  description = "ECS Cluster details"
+  value = {
+    arn  = aws_ecs_cluster.this.arn
+    id   = aws_ecs_cluster.this.id
+    name = aws_ecs_cluster.this.name
+  }
+}
