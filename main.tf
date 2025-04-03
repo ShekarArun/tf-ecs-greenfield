@@ -11,3 +11,8 @@ module "infra" {
   num_subnets = 3
   allowed_ips = ["0.0.0.0/0"]
 }
+
+module "app" {
+  source        = "./modules/app"
+  ecr_repo_name = "ui"
+}
