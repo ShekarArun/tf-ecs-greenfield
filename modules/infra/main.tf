@@ -30,3 +30,13 @@ resource "aws_route" "this" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.this.id
 }
+
+resource "aws_subnet" "this" {
+  for_each   = { for i in range(var.num_subnets) : "ecs-public-subnet-${i + 1}" => i + 1 }
+  vpc_id     = aws_vpc.this.id
+  cidr_block = cidrsubnet(aws_vpc.this.cidr_block, 8, each.value)
+
+  tags = {
+    Name = "${each.key}"
+  }
+}

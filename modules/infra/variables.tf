@@ -20,3 +20,9 @@ variable "vpc_cidr" {
     error_message = "The vpc_cidr prefix must be between /16 and /28"
   }
 }
+
+variable "num_subnets" {
+  description = "The number of subnets to be created"
+  type        = number
+  default     = 2
+}
