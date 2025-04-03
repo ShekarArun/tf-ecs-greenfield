@@ -13,8 +13,11 @@ module "infra" {
 }
 
 module "app" {
-  source        = "./modules/app"
-  ecr_repo_name = "ui"
-  app_path      = "ui"
-  image_version = "1.0.1"
+  source                 = "./modules/app"
+  ecr_repo_name          = "ui"
+  app_path               = "ui"
+  image_version          = "1.0.1"
+  app_name               = "app"
+  port                   = 80
+  ecs_execution_role_arn = module.infra.ecs_execution_role_arn
 }

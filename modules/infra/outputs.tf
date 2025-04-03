@@ -48,3 +48,7 @@ output "ecs_cluster_details" {
     name = aws_ecs_cluster.this.name
   }
 }
+
+output "ecs_execution_role_arn" {
+  value = aws_iam_role.ecs_execution_role.arn
+}
