@@ -9,3 +9,7 @@ output "infra_vpc_details" {
 output "infra_igw_details" {
   value = module.infra.igw_details
 }
+
+output "infra_subnet_details" {
+  value = module.infra.subnet_details
+}
