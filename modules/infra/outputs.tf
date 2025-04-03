@@ -5,3 +5,10 @@ output "vpc_details" {
     name = aws_vpc.this.tags_all["Name"]
   }
 }
+
+output "igw_details" {
+  value = {
+    id  = aws_internet_gateway.this.id
+    arn = aws_internet_gateway.this.arn
+  }
+}
