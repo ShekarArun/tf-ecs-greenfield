@@ -13,3 +13,7 @@ output "infra_igw_details" {
 output "infra_subnet_details" {
   value = module.infra.subnet_details
 }
+
+output "alb_details" {
+  value = module.infra.alb_details
+}

@@ -26,3 +26,8 @@ variable "num_subnets" {
   type        = number
   default     = 2
 }
+
+variable "allowed_ips" {
+  description = "The Allowed IPs to be set as ALB CIDR"
+  type        = set(string)
+}
