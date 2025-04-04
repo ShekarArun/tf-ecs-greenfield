@@ -55,7 +55,11 @@ resource "aws_lb" "this" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = [for subnet in aws_subnet.this : subnet.id]
+  subnets = [
+    for az, id in {
+      for subnet in aws_subnet.this : subnet.availability_zone => subnet.id... # The ellipsis groups by the key (AZ in this case)
+    } : id[0]                                                                  # Extract first item in each AZ since it is now grouped by AZ
+  ]
 }
 
 resource "aws_lb_listener" "this" {
