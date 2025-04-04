@@ -18,6 +18,10 @@ output "infra_alb_details" {
   value = module.infra.alb_details
 }
 
+output "infra_app_sg_details" {
+  value = module.infra.app_sg_details
+}
+
 output "infra_ecs_cluster_details" {
   value = module.infra.ecs_cluster_details
 }

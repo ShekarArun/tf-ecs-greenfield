@@ -40,6 +40,14 @@ output "alb_details" {
   }
 }
 
+output "app_sg_details" {
+  description = "App Security Group details"
+  value = {
+    sg_id   = aws_security_group.app.id
+    sg_name = aws_security_group.app.name
+  }
+}
+
 output "ecs_cluster_details" {
   description = "ECS Cluster details"
   value = {

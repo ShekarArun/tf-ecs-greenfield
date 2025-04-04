@@ -31,3 +31,8 @@ variable "allowed_ips" {
   description = "The Allowed IPs to be set as ALB CIDR"
   type        = set(string)
 }
+
+variable "app_name" {
+  description = "Name of the application"
+  type        = string
+}

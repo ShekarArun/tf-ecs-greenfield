@@ -27,3 +27,24 @@ variable "ecs_execution_role_arn" {
   description = "ARN of the ECS Execution Role"
   type        = string
 }
+
+variable "ecs_cluster_id" {
+  description = "ID of the ECS Cluster to be allocated to the service"
+  type        = string
+  # TODO: Expand to regex match of ID
+}
+
+variable "subnet_ids" {
+  description = "Subnets to associate the ECS Service"
+  type        = list(string)
+}
+
+variable "security_group_id" {
+  description = "Security Group for the ECS Service to be associated to"
+  type        = string
+}
+
+variable "is_public" {
+  description = "Is the ECS Service assigned a public IP?"
+  type        = bool
+}

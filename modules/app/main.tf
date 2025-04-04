@@ -67,3 +67,19 @@ resource "aws_ecs_task_definition" "this" {
     }
   ])
 }
+
+resource "aws_ecs_service" "this" {
+  name            = "${var.app_name}-ecs-service"
+  cluster         = var.ecs_cluster_id
+  task_definition = aws_ecs_task_definition.this.arn
+  desired_count   = 1
+  launch_type     = "FARGATE"
+  # iam_role        = var.ecs_execution_role_arn # Cannot specify IAM role for services that require a service-linked role
+  # depends_on      = [aws_iam_role_policy.foo] Not required because we're using the AWS provided role which won't be deleted, so no race condition in case of destroying resources
+
+  network_configuration {
+    subnets          = var.subnet_ids
+    security_groups  = [var.security_group_id]
+    assign_public_ip = var.is_public
+  }
+}
