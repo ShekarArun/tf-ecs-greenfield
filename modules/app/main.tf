@@ -15,9 +15,15 @@ resource "terraform_data" "login" {
 
 resource "terraform_data" "build" {
   depends_on = [terraform_data.login]
+
+  triggers_replace = [
+    filemd5("${path.module}/apps/${var.app_path}/Dockerfile")
+  ]
+
   provisioner "local-exec" {
     command = <<EOT
-              docker build -t ${local.ecr_url} \
+              docker build --platform=linux/amd64 \
+              -t ${local.ecr_url} \
               ${path.module}/apps/${var.app_path}
               EOT 
   }
@@ -29,7 +35,8 @@ resource "terraform_data" "push" {
     terraform_data.build
   ]
   triggers_replace = [
-    var.image_version
+    terraform_data.build.triggers_replace,
+    [var.image_version]
   ]
 
   provisioner "local-exec" {
@@ -64,6 +71,15 @@ resource "aws_ecs_task_definition" "this" {
           hostPort      = var.port
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-create-group"  = "true"
+          "awslogs-region"        = "ap-south-1"
+          "awslogs-group"         = "${var.app_name}-ecs-lg"
+          "awslogs-stream-prefix" = "${var.app_name}-ecs-prefix"
+        }
+      }
     }
   ])
 }
@@ -98,7 +114,7 @@ resource "aws_lb_target_group" "this" {
   vpc_id      = var.vpc_id
 }
 
-resource "aws_lb_listener_rule" "name" {
+resource "aws_lb_listener_rule" "http_rule" {
   listener_arn = var.alb_listener_arn
   condition {
     path_pattern {
