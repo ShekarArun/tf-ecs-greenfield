@@ -31,12 +31,13 @@ output "subnet_details" {
 output "alb_details" {
   description = "Application Load Balancer details"
   value = {
-    alb_id       = aws_lb.this.id
-    alb_name     = aws_lb.this.name
-    alb_dns_name = aws_lb.this.dns_name
-    sg_arn       = aws_security_group.alb.arn
-    sg_id        = aws_security_group.alb.id
-    sg_name      = aws_security_group.alb.name
+    alb_id           = aws_lb.this.id
+    alb_name         = aws_lb.this.name
+    alb_dns_name     = aws_lb.this.dns_name
+    sg_arn           = aws_security_group.alb.arn
+    sg_id            = aws_security_group.alb.id
+    sg_name          = aws_security_group.alb.name
+    alb_listener_arn = aws_lb_listener.this.arn
   }
 }
 

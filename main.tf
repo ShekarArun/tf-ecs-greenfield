@@ -25,4 +25,7 @@ module "app" {
   subnet_ids             = [for subnet in module.infra.subnet_details : subnet.id]
   security_group_id      = module.infra.app_sg_details.sg_id
   is_public              = true # Needed in our case because only then, the service can access ECR
+  vpc_id                 = module.infra.vpc_details.id
+  alb_listener_arn       = module.infra.alb_details.alb_listener_arn
+  path_pattern           = "/*"
 }

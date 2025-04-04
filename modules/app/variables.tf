@@ -48,3 +48,19 @@ variable "is_public" {
   description = "Is the ECS Service assigned a public IP?"
   type        = bool
 }
+
+variable "vpc_id" {
+  description = "ID of the VPC Resource to be mapped to the LB Target Group"
+  type        = string
+}
+
+variable "alb_listener_arn" {
+  description = "ARN of the ALB Listener"
+  type        = string
+}
+
+variable "path_pattern" {
+  description = "The path pattern to define forwarding for the ALB Listener"
+  type        = string
+  default     = "/*"
+}
