@@ -26,6 +26,6 @@ output "infra_ecs_cluster_details" {
   value = module.infra.ecs_cluster_details
 }
 
-output "app_ecr_details" {
-  value = module.app.ecr_details
-}
+# output "app_ecr_details" {
+#   value = module.app.ecr_details
+# }
