@@ -61,7 +61,7 @@ resource "aws_ecs_task_definition" "this" {
   container_definitions = jsonencode([
     {
       name      = var.app_name
-      image     = "${local.ecr_url}:latest"
+      image     = "${local.ecr_url}:${version}"
       cpu       = 256
       memory    = 512
       essential = true
@@ -112,6 +112,10 @@ resource "aws_lb_target_group" "this" {
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
+  health_check {
+    enabled = true
+    path    = var.healthcheck_path
+  }
 }
 
 resource "aws_lb_listener_rule" "http_rule" {

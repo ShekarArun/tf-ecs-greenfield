@@ -9,6 +9,7 @@ locals {
       port                = 80
       is_public           = true
       path_pattern        = "/*"
+      healthcheck_path    = "/*"
     }
     api = {
       ecr_repository_name = "api"
@@ -18,6 +19,7 @@ locals {
       port                = 80
       is_public           = true
       path_pattern        = "/*"
+      healthcheck_path    = "/api/healthcheck"
     }
   }
 

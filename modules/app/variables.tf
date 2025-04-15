@@ -64,3 +64,9 @@ variable "path_pattern" {
   type        = string
   default     = "/*"
 }
+
+variable "healthcheck_path" {
+  description = "Path for load balancer health check"
+  type        = string
+  default     = "/*"
+}
